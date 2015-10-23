@@ -22,7 +22,7 @@ public class Minicraft extends ApplicationAdapter {
     float xVelocity = 0;
     float yVelocity = 0;
 
-    final float MAX_VELOCITY = 100;
+    final float MAX_VELOCITY = 500;
 
     @Override
     public void create () {
@@ -50,10 +50,10 @@ public class Minicraft extends ApplicationAdapter {
     }
 
     void move() {
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) { //it takes an integer as the key which will represent the UP arrow
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             yVelocity = MAX_VELOCITY;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) { //if we do if, else if, else if...etc, we could not push the keys at the same time. so 4 if statements are needed
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             yVelocity = MAX_VELOCITY * -1;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -63,24 +63,21 @@ public class Minicraft extends ApplicationAdapter {
             xVelocity = MAX_VELOCITY * -1;
         }
 
-        x += xVelocity * Gdx.graphics.getDeltaTime(); //makes it move but takes into account pixel refresh rate
+        x += xVelocity * Gdx.graphics.getDeltaTime();
         y += yVelocity * Gdx.graphics.getDeltaTime();
 
         //screen parameters
         if (y < 0 ) { //player doesn't go below y axis
             y = 0;
         }
-
         if (x < 0) { //player doesn't go to the left of x axis
             x = 0;
         }
-
-        if (y > viewport.getScreenHeight() - HEIGHT) { //player doesn't go past right side of screen
-            y = viewport.getScreenHeight() - HEIGHT;
+        if (y > viewport.getWorldHeight() - HEIGHT) { //player doesn't go past right side of screen
+            y = viewport.getWorldHeight() - HEIGHT;
         }
-
-        if (x > viewport.getScreenWidth() - WIDTH) { //player doesn't go past top of screen
-            x = viewport.getScreenWidth() - WIDTH;
+        if (x > viewport.getWorldWidth() - WIDTH) { //player doesn't go past top of screen
+            x = viewport.getWorldWidth() - WIDTH;
         }
 
         xVelocity *= 0.9;
